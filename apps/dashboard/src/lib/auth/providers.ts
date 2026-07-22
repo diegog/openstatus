@@ -1,8 +1,13 @@
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
+import Okta from "next-auth/providers/okta";
 import Resend from "next-auth/providers/resend";
 
 export const GitHubProvider = GitHub({
+  allowDangerousEmailAccountLinking: true,
+});
+
+export const OktaProvider = Okta({
   allowDangerousEmailAccountLinking: true,
 });
 

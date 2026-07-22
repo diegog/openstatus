@@ -1,5 +1,6 @@
 import { GitHubIcon } from "@openstatus/icons";
 import { GoogleIcon } from "@openstatus/icons";
+import { OktaIcon } from "@openstatus/icons";
 import { Separator } from "@openstatus/ui/components/ui/separator";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -68,6 +69,19 @@ export default async function Page(props: {
             Sign in with Google <GoogleIcon className="ml-2 h-4 w-4" />
           </LoginButton>
         </form>
+        {process.env.AUTH_OKTA_ISSUER ? (
+          <form
+            action={async () => {
+              "use server";
+              await signIn("okta", { redirectTo: redirectTo ?? undefined });
+            }}
+            className="w-full"
+          >
+            <LoginButton type="submit" provider="okta">
+              Sign in with Okta <OktaIcon className="ml-2 h-4 w-4" />
+            </LoginButton>
+          </form>
+        ) : null}
       </div>
       <p className="text-muted-foreground mx-auto max-w-md px-8 text-center text-xs text-pretty">
         By clicking continue, you agree to our{" "}
